@@ -21,11 +21,15 @@ class MainActivity : AppCompatActivity() {
         var textView = findViewById<TextView>(R.id.tvCount)
         var button = findViewById<Button>(R.id.btnCount)
 
-        textView.text=viewModel.count.toString() //1.2ვიზუალს აჩვენებს რომ არის 0
+        viewModel.count.observe(this,Observer{
+            textView.text=it.toString() //ავტომატურად ანახლებს მნიშვნელობას დაკლილებისას
+        })
+
+       // textView.text=viewModel.count.toString() //1.2ვიზუალს აჩვენებს რომ არის 0
         button.setOnClickListener { //დაჭერის შემდგე
 
             viewModel.updateCount() //ვიუმოდელიდან გადმოდის ფუნქცია
-            textView.text=viewModel.count.toString() //ვიზუალში აჩვენებს გაზრდას
+         //   textView.text=viewModel.count.toString() //ვიზუალში აჩვენებს გაზრდას
 
         }
 
